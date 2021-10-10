@@ -1,5 +1,5 @@
 from time import sleep
-from os import system
+from os import system, name
 
 
 i: int = 0
@@ -31,10 +31,17 @@ def custom_banner(line1: str = "", line2: str = "") -> str:
     return banner
 
 
+def clear() -> None:
+    if name == "nt":
+        system("cls")
+    else:
+        system("clear")
+
+
 def play_again() -> bool:
     while True:
         try:
-            system("clear")
+            clear()
             print(
                 custom_banner("      YOU ARE DEAD.", f"   {points} FizzBuzz's Drank!")
             )
@@ -54,6 +61,7 @@ def play_again() -> bool:
 
 
 # Display the title screen.
+clear()
 try:
     input(custom_banner("     Press [ENTER]", "       To Start"))
 
@@ -62,7 +70,7 @@ except KeyboardInterrupt:
     exit()
 
 while True:
-    system("clear")
+    clear()
     print(
         custom_banner(f"     {points} FizzBuzz's Drank!", f"        {lives} Lives Left")
     )
